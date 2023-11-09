@@ -52,6 +52,67 @@ function gameboard(){
     };
 };
 
-function gameController(){
+function gameController(playerOnename = "Player One", playerTwoName = "Player Two"){
+    const board = gameboard();
+
+    const players = [
+        {
+            name: playerOnename,
+            sign: 1
+        },
+        {
+            name: playerTwoName,
+            sign: 2
+        }
+    ]
+
+    let activePlayer = players[0];
+
+    const changePlayerTurn = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    }
+
+    const getActivePlayer = () => activePlayer;
+
+    const printRound = () => {
+        board.printBoard();
+        console.log(`${getActivePlayer().name}\'s turn.`);
+    }
+
+    const winConditions = [
+        //row combinations
+        [[0][0],[0][1],[0][2]],
+        [[1][0],[1][1],[1][2]],
+        [[2][0],[2][1],[2][2]],
+        //column combinations
+        [[0][0],[1][0],[2][0]],
+        [[0][1],[1][1],[2][1]],
+        [[0][2],[1][2],[2][2]],
+        //diagonal condtions
+        [[0][0],[1][1],[2][2]],
+        [[0][2],[1][1],[2][0]]
+    ]
+
+    const checkWin = () => {
+        
+    }
+
+    const playRound = (row, column) => {
+        console.log(`${getActivePlayer().name}\'s puts sing in row n° ${row} and column n°${column}`);
+
+        board.insertSign(row, column, getActivePlayer().sign);
+
+        changePlayerTurn();
+        printRound();
+    }   
+
+    printRound();
+
+    return{
+        playRound,
+        getActivePlayer
+    }
 
 }
+
+const game = gameController();
