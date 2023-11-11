@@ -52,12 +52,14 @@ function gameboard(){
     };
 };
 
-function gameController(playerOnename = "Player One", playerTwoName = "Player Two"){
+//this will be the function that will controll the game flow
+function gameController(playerOneName = "Player One", playerTwoName = "Player Two"){
+    //we call the gameboard func to use the methods created in it
     const board = gameboard();
 
     const players = [
         {
-            name: playerOnename,
+            name: playerOneName,
             sign: 1
         },
         {
@@ -76,25 +78,39 @@ function gameController(playerOnename = "Player One", playerTwoName = "Player Tw
 
     const printRound = () => {
         board.printBoard();
-        console.log(`${getActivePlayer().name}\'s turn.`);
+        console.log(`${getActivePlayer().name}'s turn.`);
     }
 
     const winConditions = [
         //row combinations
-        [[0][0],[0][1],[0][2]],
-        [[1][0],[1][1],[1][2]],
-        [[2][0],[2][1],[2][2]],
+        [[0, 0],[0, 1],[0, 2]],
+        [[1, 0],[1, 1],[1, 2]],
+        [[2, 0],[2, 1],[2, 2]],
         //column combinations
-        [[0][0],[1][0],[2][0]],
-        [[0][1],[1][1],[2][1]],
-        [[0][2],[1][2],[2][2]],
+        [[0, 0],[1, 0],[2, 0]],
+        [[0, 1],[1, 1],[2, 1]],
+        [[0, 2],[1, 2],[2, 2]],
         //diagonal condtions
-        [[0][0],[1][1],[2][2]],
-        [[0][2],[1][1],[2][0]]
-    ]
+        [[0, 0],[1, 1],[2, 2]],
+        [[0, 2],[1, 1],[2, 0]]
+    ];
 
     const checkWin = () => {
-        
+        for (const condition of winConditions){
+            const [a, b, c] = condition;
+
+            const cellValues = [
+                board.getBoard()[a[0]][a[1]].getValue(),
+                board.getBoard()[b[0]][b[1]].getValue(),
+                board.getBoard()[c[0]][c[1]].getValue()
+            ];
+
+            if (cellValues.every(value => value !== 0 && value === cellValues[0])){
+                return true;
+            }
+        };
+
+        return false;
     }
 
     const playRound = (row, column) => {
@@ -102,17 +118,74 @@ function gameController(playerOnename = "Player One", playerTwoName = "Player Tw
 
         board.insertSign(row, column, getActivePlayer().sign);
 
-        changePlayerTurn();
-        printRound();
+        if(checkWin()){
+            console.log(`${getActivePlayer().name} wins!`);
+            return;
+        } else {
+            changePlayerTurn();
+            printRound();
+        }
+
     }   
 
     printRound();
 
     return{
         playRound,
-        getActivePlayer
+        getActivePlayer,
+        getBoard: board.getBoard
+    };
+
+}
+function screenController(){
+    const game = gameController();
+    const playerTurnDiv = document.querySelector('.turn');
+    const boardDiv = document.querySelector('.board');
+
+    function createCellButton(row, column){
+        const cellButton =document.createElement('button');
+        cellButton.classList.add('cell');
+        cellButton.dataset.row = row;
+        cellButton.dataset.column = column;
+        return cellButton;
     }
+
+    const updateScreen = () => {
+        const board = game.getBoard();
+        const activePlayer = game.getActivePlayer();
+
+        playerTurnDiv.textContent = `${activePlayer.name}'s turn.`
+
+        boardDiv.textContent = "";
+
+        board.forEach((row, rowIndex) => {
+            row.forEach((cell, columnIndex) => {
+                const cellButton = createCellButton(rowIndex, columnIndex);
+                cellButton.textContent = cell.getValue();
+                boardDiv.appendChild(cellButton)
+            })
+        })
+    }
+
+    function clickHandlerBoard(e){
+        const selectedRow = e.target.dataset.row;
+        const selectedColumn = e.target.dataset.column;
+
+        if (selectedRow !== undefined && selectedColumn !== undefined){
+            const row = parseInt(selectedRow);
+            const column = parseInt(selectedColumn);
+            if (!isNaN(row) && !isNaN(column) && game.getBoard()[row][column].getValue() === 0) {
+                game.playRound(row, column);
+                updateScreen();
+            }
+
+        } ;
+
+    }
+    boardDiv.addEventListener("click", clickHandlerBoard);
+
+    updateScreen();
 
 }
 
-const game = gameController();
+screenController()  
