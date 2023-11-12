@@ -13,23 +13,46 @@
         </div>
         <div class="game-container">
             <div class="header">
-                <div class="turn"></div>
+                <div class="turn-div">
+                    <div class="player-one">Player One</div>
+                    <div class="player-two">Player Two</div>
+                </div>
             </div>
             <div class="content">
                 <div class="board">
                 </div>
             </div>
             <div class="footer">
-                <button>CHANGE NAME</button>
-                <button>RESTART</button>
-                <button>RESET HISTORY</button>
+                <button class="change-name">CHANGE NAME</button>
+                <button class="start-new-name" onclick="screenController()">START NEW GAME</button>
             </div>
         </div>
-        <div class="game-history">
-            
-        </div>
-
     </div>
+    <div class="win-window">
+        <dialog id="winner-dialog" class="hidden">
+            <div class="winner"></div>
+            <button id="close-winner-dialog" >Close</button>
+            <button id="new-game-button">Start New Game</button>
+        </dialog>
+    </div>
+    <div class="name-window">
+        <dialog id="name-dialog">
+            <form>
+                <legend>Change Names</legend>
+                <div class="player-one-new-name">
+                    <label for="name-one">Player One New Name?</label>
+                    <input type="text" name="name-one" id="name-one" required>
+                </div>
+                <div class="player-two-new-name">
+                    <label for="name-two">Player Two New Name?</label>
+                    <input type="text" name="name-two" id="name-two" required>
+                </div>
+            </form>
+            <button id="close-name-dialog" data-close-modal>Close</button>
+            <button class="submit">Change Names</button>
+        </dialog>
+    </div>
+    
 
     <script src="script.js"></script>
 </body>

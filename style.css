@@ -1,27 +1,26 @@
-body {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body{
     margin: 0;
-    padding: 0;
-    background-color: #10b981;
+}
+
+*{
+    border-radius: 15px;
 }
 
 .main-container{
-    width: 70vw;
-    height: 70vh;
+    width: 100vw;
+    height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 5fr;
     gap: 10px;
-    background-color: #2dd4bf;
+    background-color: navy;
+    margin: 0;
 }
 
 .game-summary,
 .game-container,
 .game-history{
-    border: 5px solid black;
+    
+    background-color: white;
 }
 
 .game-container{
@@ -31,10 +30,17 @@ body {
 
 .header{
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    border: 1px solid black;
+
     margin: 7px;
+    background-color: navy;
+}
+
+.turn-div{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    justify-items: space-around;
 }
 
 .content{
@@ -46,22 +52,164 @@ body {
 
 .board{
     display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 150px 150px 150px;
+    grid-template-rows: 150px 150px 150px;
+    border-radius: 0;
+    border: none;
+    gap: 5px;
 }
 
 .footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid black;
     margin: 7px;
+    background-color: navy;
+}
+
+.change-name,
+.start-new-name{
+    border: none;
+    border-radius: 15px;
+    height: 50px;
+    width: 300px;
+    font-size: 30px;
+}
+
+.cell{
+    border: none;
+    border-radius: 0px;
+    font-size: 80px;
+    background-color: navy;
+    color: white;
 }
 
 .player-one,
 .player-two{
-    border: 1px solid black;
+    height: 50px;
+    width: 300px;
+    border: 3px solid navy;
     padding: 10px;
-    background-color: black;
+    font-size: 40px;
+    background-color: white;
+    color: navy;
+    justify-self: center;
+}
+
+
+
+/* CSS for the win dialog */
+#winner-dialog {
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    height: 100px;
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #007BFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+/* Styles for the dialog content */
+#winner-dialog .winner {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Styles for the buttons */
+#winner-dialog button {
+    padding: 10px 20px;
+    background-color: #007BFF;
     color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Additional styles for the close button */
+#winner-dialog button[data-close-modal] {
+    background-color: #FF6B6B;
+}
+
+/* Hover effect for buttons */
+#winner-dialog button:hover {
+    background-color: #0056b3;
+}
+
+/* Overlay style to cover the rest of the page */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+    z-index: 999; /* Place it below the dialog */
+    display: none;
+}
+
+/* CSS for the change name dialog */
+#name-dialog {
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    height: 200px; /* Increase the height */
+    width: 400px;  /* Increase the width */
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #007BFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+
+/* Styles for the dialog content */
+#name-dialog .legend {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Styles for the buttons */
+#name-dialog button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Additional styles for the close button */
+#name-dialog button[data-close-modal] {
+    background-color: #FF6B6B;
+}
+
+/* Hover effect for buttons */
+#name-dialog button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for inputs */
+#name-dialog input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
