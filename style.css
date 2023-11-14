@@ -1,39 +1,36 @@
-body{
-    margin: 0;
+@font-face {
+    font-family: MPLUS1p-regular;
+    src: url(M_PLUS_1p/MPLUS1p-Regular.ttf);
 }
 
-*{
-    border-radius: 15px;
+
+body{
+    margin: 0;
+    font-family: MPLUS1p-regular;
 }
 
 .main-container{
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr;
     gap: 10px;
-    background-color: navy;
+    background-color: black;
     margin: 0;
 }
 
-.game-summary,
-.game-container,
-.game-history{
-    
-    background-color: white;
-}
 
 .game-container{
     display: grid;
     grid-template-rows: 1fr 5fr 1fr;
+    background-color: black;
+    margin: 0;
 }
 
 .header{
     display: flex;
     align-items: center;
-
-    margin: 7px;
-    background-color: navy;
+    background-color: black;
 }
 
 .turn-div{
@@ -44,7 +41,6 @@ body{
 }
 
 .content{
-    margin: 7px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,44 +52,48 @@ body{
     grid-template-rows: 150px 150px 150px;
     border-radius: 0;
     border: none;
-    gap: 5px;
+    gap: 10px;
 }
 
 .footer{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 7px;
-    background-color: navy;
+    background-color: black;
 }
 
 .change-name,
 .start-new-name{
-    border: none;
     border-radius: 15px;
     height: 50px;
     width: 300px;
     font-size: 30px;
+    font-family:  MPLUS1p-regular;
+    background-color: black;
+    color: yellow;
+    border: 1px solid yellow;
 }
 
 .cell{
     border: none;
     border-radius: 0px;
     font-size: 80px;
-    background-color: navy;
-    color: white;
+    border: 1px solid yellow;
+    background-color: black;
+    color: yellow;
+    border-radius: 10px;
 }
 
 .player-one,
 .player-two{
-    height: 50px;
-    width: 300px;
-    border: 3px solid navy;
+    height: fit-content;
+    width: fit-content;
     padding: 10px;
     font-size: 40px;
     background-color: white;
-    color: navy;
+    color: black;
     justify-self: center;
+    border-radius: 10px;
 }
 
 

@@ -66,11 +66,11 @@ function gameController(playerOneName = "Player One", playerTwoName = "Player Tw
     //obeject that stores my players
     const players = [
         {
-            name: playerOneName,
+            name: playerOneDiv.textContent,
             sign: 'X'
         },
         {
-            name: playerTwoName,
+            name: playerTwoDiv.textContent,
             sign: 'O'
         }
     ];
@@ -169,9 +169,10 @@ function screenController(){
 
     const game = gameController();
     const boardDiv = document.querySelector('.board');
-    const changePlayersName = document.querySelector('.change-name');
     const newGameButton = document.getElementById('new-game-button');
     const winnerDialog = document.getElementById('winner-dialog');
+    const playerOneDiv = document.querySelector('.player-one');
+    const playerTwoDiv = document.querySelector('.player-two');
 
     function showWinDialog(winnerName) {
         
@@ -187,6 +188,25 @@ function screenController(){
         })
 
     }
+
+    function highligthTurn(){
+        if(game.getActivePlayer().name === playerOneDiv.textContent){
+            playerOneDiv.style.backgroundColor = 'black';
+            playerOneDiv.style.color = 'yellow';
+            playerOneDiv.style.border = '1px solid yellow';
+            playerTwoDiv.style.backgroundColor = 'white';
+            playerTwoDiv.style.color = 'black';
+            playerTwoDiv.style.border = 'none';
+            
+        } else if(game.getActivePlayer().name === playerTwoDiv.textContent){
+            playerTwoDiv.style.backgroundColor = 'black';
+            playerTwoDiv.style.color = 'yellow';
+            playerTwoDiv.style.border = '1px solid yellow';
+            playerOneDiv.style.backgroundColor = 'white';
+            playerOneDiv.style.color = 'black';
+            playerOneDiv.style.border = 'none';
+        }
+    };
 
     function createCellButton(row, column){
         const cellButton =document.createElement('button');
@@ -208,6 +228,7 @@ function screenController(){
                 boardDiv.appendChild(cellButton)
             })
         })
+        highligthTurn();
 
     }
 
@@ -215,15 +236,15 @@ function screenController(){
     const changeNameButton = document.querySelector('.change-name');
     const submitButton = document.querySelector('.submit');
     const closeDialogButton = document.getElementById('close-name-dialog');
-    // Function to open the dialog
+
     const openDialog = () => {
         nameDialog.showModal();
     };
-    // Function to close the dialog
+
     const closeDialog = () => {
         nameDialog.close();
     };
-    // Function to handle form submission and call changeName
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const nameOne = document.getElementById('name-one').value;

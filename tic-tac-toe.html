@@ -8,14 +8,11 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="game-summary">
-
-        </div>
         <div class="game-container">
             <div class="header">
                 <div class="turn-div">
-                    <div class="player-one">Player One</div>
-                    <div class="player-two">Player Two</div>
+                    <div class="player-one">PLAYER ONE</div>
+                    <div class="player-two">PLAYER TWO</div>
                 </div>
             </div>
             <div class="content">
@@ -41,15 +38,18 @@
                 <legend>Change Names</legend>
                 <div class="player-one-new-name">
                     <label for="name-one">Player One New Name?</label>
-                    <input type="text" name="name-one" id="name-one" required>
+                    <input type="text" name="name-one" id="name-one" required />
                 </div>
                 <div class="player-two-new-name">
                     <label for="name-two">Player Two New Name?</label>
-                    <input type="text" name="name-two" id="name-two" required>
+                    <input type="text" name="name-two" id="name-two" required />
+                </div>
+                <div class="buttons">
+                    <button id="close-name-dialog" data-close-modal>Close</button>
+                    <button type="submit" class="submit">Change Names</button>
                 </div>
             </form>
-            <button id="close-name-dialog" data-close-modal>Close</button>
-            <button class="submit">Change Names</button>
+            
         </dialog>
     </div>
     
