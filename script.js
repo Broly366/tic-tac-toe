@@ -167,6 +167,7 @@ function gameController(playerOneName = "Player One", playerTwoName = "Player Tw
 //function responsible of the implementation of the gameController in the screen
 function screenController(){
 
+    //call the gameController function and select some html elements
     const game = gameController();
     const boardDiv = document.querySelector('.board');
     const newGameButton = document.getElementById('new-game-button');
@@ -174,6 +175,7 @@ function screenController(){
     const playerOneDiv = document.querySelector('.player-one');
     const playerTwoDiv = document.querySelector('.player-two');
 
+    //once the checkWin() function is true it opens the dialog and shows the winner
     function showWinDialog(winnerName) {
         
         const winnerElement = document.querySelector('.winner');
@@ -188,7 +190,7 @@ function screenController(){
         })
 
     }
-
+    //changes the style of the active player
     function highligthTurn(){
         if(game.getActivePlayer().name === playerOneDiv.textContent){
             playerOneDiv.style.backgroundColor = 'black';
@@ -208,6 +210,7 @@ function screenController(){
         }
     };
 
+    //creates the board cell
     function createCellButton(row, column){
         const cellButton =document.createElement('button');
         cellButton.classList.add('cell');
@@ -216,6 +219,7 @@ function screenController(){
         return cellButton;
     }
 
+    //calls the board and adds the cells and their contents every time is called and calls highlights() 
     const updateScreen = () => {
         const board = game.getBoard();
 
@@ -232,19 +236,23 @@ function screenController(){
 
     }
 
+    //select some other HTML elements
     const nameDialog = document.getElementById('name-dialog');
     const changeNameButton = document.querySelector('.change-name');
     const submitButton = document.querySelector('.submit');
     const closeDialogButton = document.getElementById('close-name-dialog');
 
+
+    //opens the name dialog
     const openDialog = () => {
         nameDialog.showModal();
     };
-
+    //closes the name dialog
     const closeDialog = () => {
         nameDialog.close();
     };
 
+    //it calls changeName() when the submit button is called
     const handleSubmit = (event) => {
         event.preventDefault();
         const nameOne = document.getElementById('name-one').value;
@@ -254,10 +262,13 @@ function screenController(){
         
         closeDialog();
     };
+
+    //adds some event listerns to the various buttons
     changeNameButton.addEventListener('click', openDialog);
     closeDialogButton.addEventListener('click', closeDialog);
     submitButton.addEventListener('click', handleSubmit);
 
+    //handles the click on a cell and check the win if there is a winner and declares the winnner
     function clickHandlerBoard(e){
         const selectedRow = e.target.dataset.row;
         const selectedColumn = e.target.dataset.column;
@@ -283,7 +294,7 @@ function screenController(){
         
         
     }
-
+    
     boardDiv.addEventListener("click", clickHandlerBoard);
 
     updateScreen();
